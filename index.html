@@ -1,169 +1,102 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T.T Aviation Photography</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --text: #f8fafc;
-      --accent: #38bdf8;
-      --highlight: #facc15;
-      --muted: #94a3b8;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-    }
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: #1e293b;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.75rem;
-      color: var(--accent);
-    }
-    nav {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-    nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: bold;
-      border-bottom: 2px solid transparent;
-    }
-    nav a:hover, nav a.active {
-      border-color: var(--highlight);
-      color: var(--highlight);
-    }
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    section {
-      display: none;
-    }
-    section.active {
-      display: block;
-    }
-    h2 {
-      color: var(--accent);
-    }
-    .gallery img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    .blog-post, .product {
-      background-color: #1e293b;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-      margin-bottom: 2rem;
-    }
-    .product img {
-      width: 100%;
-      max-width: 220px;
-      border-radius: 6px;
-    }
-    .buy-button {
-      background-color: var(--highlight);
-      color: #000;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: none;
-      border-radius: 6px;
-      background-color: #334155;
-      color: var(--text);
-    }
-    .contact-form button {
-      background-color: var(--accent);
-      color: #000;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T.TAviation Photography</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #0a1a2a; /* dark navy aviation inspired */
+    color: #e0e7ff;
+  }
+
+  header {
+    padding: 1rem 2rem;
+    text-align: center;
+    background: #10294a;
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+    user-select: none;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  /* Gallery grid */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Contact section */
+  footer {
+    margin-top: 3rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    background: #10294a;
+    color: #a9b7d6;
+  }
+
+  footer a {
+    color: #7fd1ff;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 600;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Instagram embed container */
+  .instagram-widget {
+    margin-top: 1rem;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>T.T Aviation Photography</h1>
-    <nav>
-      <a href="#" class="active" onclick="showSection('home')">Home</a>
-      <a href="#" onclick="showSection('blog')">Blog</a>
-      <a href="#" onclick="showSection('shop')">Shop</a>
-      <a href="#" onclick="showSection('contact')">Contact</a>
-    </nav>
-  </header>
-  <main>
-    <section id="home" class="active">
-      <h2>Welcome</h2>
-      <p>Explore my aviation and landscape photography portfolio.</p>
-      <div class="gallery">
-        <img src="images/F15.jpg" alt="F-15" />
-      </div>
-    </section>
-    <section id="blog">
-      <h2>Blog</h2>
-      <div class="blog-post">
-        <h3>First Blog Post</h3>
-        <p>This is an example blog post.</p>
-      </div>
-    </section>
-    <section id="shop">
-      <h2>Shop</h2>
-      <div class="product">
-        <img src="images/F15.jpg" alt="F-15 Print" />
-        <p>F-15 Jet Print - Contact for purchase.</p>
-        <button class="buy-button" onclick="alert('Email me to purchase')">Buy</button>
-      </div>
-    </section>
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <form class="contact-form" onsubmit="submitForm(event)">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Message" rows="5" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-  </main>
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-      event.target.classList.add('active');
-    }
-    function submitForm(event) {
-      event.preventDefault();
-      const form = event.target;
-      const name = encodeURIComponent(form.name.value);
-      const email = encodeURIComponent(form.email.value);
-      const message = encodeURIComponent(form.message.value);
-      window.location.href = `mailto:theotonkinson0@gmail.com?subject=Contact from ${name}&body=${message} (Email: ${email})`;
-    }
-  </script>
+
+<header>T.TAviation</header>
+
+<main>
+  <section class="gallery" id="gallery">
+    <!-- Add your photos here by adding <img src="images/photo1.jpg" alt="Photo description" /> -->
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Sample Photo 1" />
+    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" alt="Sample Photo 2" />
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Sample Photo 3" />
+  </section>
+</main>
+
+<footer>
+  <div>Contact me: <a href="mailto:theotonkinson0@gmail.com">theotonkinson0@gmail.com</a></div>
+  <div class="instagram-widget">
+    <a href="https://instagram.com/theotphotography" target="_blank" rel="noopener noreferrer">
+      Follow me on Instagram @theotphotography
+    </a>
+  </div>
+</footer>
+
 </body>
 </html>
