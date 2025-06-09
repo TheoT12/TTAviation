@@ -1,408 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>T.T Aviation Photography</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    /* Dark theme & layout */
-    body {
-      margin: 0;
-      font-family: 'Oswald', sans-serif;
-      background-color: #0c0c0c;
-      color: #f0f0f0;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
-    header {
-      background: linear-gradient(90deg, #000000, #1a1a1a);
-      padding: 20px;
-      text-align: center;
-      border-bottom: 2px solid #333;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-      color: #f0f0f0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T.T Aviation Photography</title>
+
+<style>
+  /* Base & Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7f9fc;
+    color: #1b2a49;
+    line-height: 1.6;
+  }
+  a {
+    color: #1e4e8c; /* Navy blue */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #ff6700; /* Bright orange */
+  }
+
+  /* Container */
+  .container {
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    border-bottom: 2px solid #e0e7f1;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2.8rem;
+    letter-spacing: 0.2em;
+    color: #1e4e8c; /* navy */
+    text-shadow: 0 0 3px #a2c8ff;
+  }
+
+  /* Navigation */
+  nav {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  nav a {
+    padding-bottom: 4px;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  nav a.active,
+  nav a:hover {
+    border-color: #ff6700; /* bright orange underline */
+    color: #ff6700;
+  }
+
+  /* Sections */
+  section {
+    display: none;
+    margin-top: 2rem;
+  }
+  section.active {
+    display: block;
+  }
+
+  /* Home Section */
+  #homeSection h2 {
+    font-size: 2rem;
+    color: #1e4e8c;
+    margin-bottom: 1rem;
+  }
+  #homeSection p {
+    font-size: 1.1rem;
+    color: #3a4f6b;
+    margin-bottom: 2rem;
+  }
+  #homeSection img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(30, 78, 140, 0.3);
+    transition: transform 0.3s ease;
+  }
+  #homeSection img:hover {
+    transform: scale(1.03);
+  }
+
+  /* Blog Section */
+  #blogSection h2 {
+    font-size: 2rem;
+    color: #1e4e8c;
+    margin-bottom: 1rem;
+  }
+  .blog-post {
+    background: white;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(30, 78, 140, 0.15);
+  }
+  .blog-post h3 {
+    margin-top: 0;
+    color: #ff6700;
+  }
+  .blog-post p {
+    color: #3a4f6b;
+    margin-bottom: 0;
+  }
+
+  /* Shop Section */
+  #shopSection h2 {
+    font-size: 2rem;
+    color: #1e4e8c;
+    margin-bottom: 1rem;
+  }
+  .product {
+    background: white;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(30, 78, 140, 0.15);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .product img {
+    max-width: 150px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px #ff6700;
+  }
+  .product-details {
+    flex-grow: 1;
+  }
+  .product-details h3 {
+    margin-top: 0;
+    color: #ff6700;
+  }
+  .product-details p {
+    color: #3a4f6b;
+  }
+  .buy-button {
+    background: #ff6700;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+  }
+  .buy-button:hover {
+    background: #e85a00;
+  }
+
+  /* Contact Section */
+  #contactSection h2 {
+    font-size: 2rem;
+    color: #1e4e8c;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  form.contact-form {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(30, 78, 140, 0.15);
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    padding: 2rem 1.5rem;
+  }
+  form.contact-form label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #1e4e8c;
+  }
+  form.contact-form input,
+  form.contact-form textarea {
+    width: 100%;
+    margin-top: 0.3rem;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1.5px solid #a3c3f7;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+  }
+  form.contact-form input:focus,
+  form.contact-form textarea:focus {
+    outline: none;
+    border-color: #ff6700;
+    box-shadow: 0 0 6px #ff6700;
+  }
+  form.contact-form textarea {
+    resize: vertical;
+  }
+  form.contact-form button {
+    margin-top: 1.8rem;
+    background: #ff6700;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    font-weight: 700;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    width: 100%;
+  }
+  form.contact-form button:hover {
+    background: #e85a00;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
     nav {
-      margin-top: 10px;
-    }
-    nav a {
-      margin: 0 10px;
-      color: #aaa;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover,
-    nav a.active {
-      color: #4fa3ff;
-    }
-    main {
-      padding-top: 120px; /* For fixed header */
-      max-width: 1200px;
-      margin: auto;
-      position: relative;
-      min-height: 100vh;
-    }
-    section {
-      padding: 60px 20px;
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      transition: opacity 0.7s ease-in-out;
-      pointer-events: none;
-    }
-    section.active {
-      opacity: 1;
-      position: relative;
-      pointer-events: auto;
-    }
-    h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 30px;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .photo-card {
-      background: #1a1a1a;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
-      text-align: center;
-    }
-    .photo-card img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.4s ease;
-    }
-    .photo-card img:hover {
-      transform: scale(1.05);
-    }
-    .buy-btn {
-      display: inline-block;
-      margin: 12px 0 20px;
-      padding: 10px 20px;
-      background: #4fa3ff;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 6px;
-      transition: background 0.3s;
-    }
-    .buy-btn:hover {
-      background: #2b7bdb;
-    }
-    /* Lightbox styles */
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
-    }
-    .lightbox:target {
-      display: flex;
-    }
-    /* Contact form styles */
-    .about,
-    .contact,
-    .blog,
-    .shop {
-      text-align: center;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    footer {
-      text-align: center;
-      padding: 30px;
-      background-color: #111;
-      color: #666;
-      font-size: 0.9rem;
-      border-top: 1px solid #333;
-      margin-top: 50px;
-    }
-    a.link {
-      color: #4fa3ff;
-      text-decoration: underline;
-    }
-    form {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 1rem;
     }
-    input,
-    textarea {
-      padding: 10px;
-      font-family: inherit;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: none;
-      outline: none;
+    .product {
+      flex-direction: column;
+      align-items: flex-start;
     }
-    button {
-      padding: 12px;
-      font-weight: bold;
-      background: #4fa3ff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
+    .product img {
+      max-width: 100%;
+      margin-bottom: 1rem;
     }
-    button:hover {
-      background: #2b7bdb;
-    }
-    /* Instagram embed container */
-    #insta-feed {
-      max-width: 700px;
-      margin: 30px auto;
-      text-align: center;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>T.T Aviation Photography</h1>
-    <nav>
-      <a href="#home" class="nav-link active">Home</a>
-      <a href="#portfolio" class="nav-link">Portfolio</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#contact" class="nav-link">Contact</a>
-      <a href="#blog" class="nav-link">Blog</a>
-      <a href="#shop" class="nav-link">Shop</a>
-    </nav>
-  </header>
 
-  <main>
-    <section id="home" class="active" aria-label="Home section">
-      <h2>Welcome to T.T Aviation</h2>
-      <p class="about">
-        I capture high-speed moments in aviation, military aircraft, and landscapes that inspire awe.
-        Explore my world through the lens.
-      </p>
-    </section>
+<header>
+  <h1>T.T Aviation Photography</h1>
+  <nav>
+    <a href="#" class="active" id="navHome">Home</a>
+    <a href="#" id="navBlog">Blog</a>
+    <a href="#" id="navShop">Shop</a>
+    <a href="#" id="navContact">Contact</a>
+  </nav>
+</header>
 
-    <section id="portfolio" aria-label="Portfolio section">
-      <h2>Photo Gallery</h2>
-      <div class="gallery" id="gallery">
-        <!-- Images load here by JS -->
+<main class="container">
+
+  <!-- Home -->
+  <section id="homeSection" class="active">
+    <h2>Welcome to T.T Aviation Photography</h2>
+    <p>Capturing the power and beauty of flight. Explore my portfolio featuring stunning aircraft and landscapes.</p>
+    <img src="images/F15.jpg" alt="F-15 Fighter Jet in flight" />
+  </section>
+
+  <!-- Blog -->
+  <section id="blogSection">
+    <h2>Latest Blog Posts</h2>
+
+    <article class="blog-post">
+      <h3>Top 5 Tips for Aviation Photography</h3>
+      <p>Discover essential techniques to capture sharp and dynamic images of aircraft in flight.</p>
+    </article>
+
+    <article class="blog-post">
+      <h3>Exploring Landscape Shots Around Airfields</h3>
+      <p>How to combine stunning landscapes with aviation elements for unique photographs.</p>
+    </article>
+
+  </section>
+
+  <!-- Shop -->
+  <section id="shopSection">
+    <h2>Prints & Merchandise</h2>
+
+    <div class="product">
+      <img src="images/F15.jpg" alt="F-15 Print" />
+      <div class="product-details">
+        <h3>F-15 Fighter Jet Print</h3>
+        <p>High-quality 12"x18" print, signed by the photographer.</p>
+        <button class="buy-button" data-product="F-15 Fighter Jet Print">Buy Now</button>
       </div>
-    </section>
+    </div>
 
-    <section id="about" aria-label="About section">
-      <h2>About Me</h2>
-      <p class="about">
-        I'm Theo, a teenage aviation photographer from Wales. I combine technical skill and artistic
-        vision to freeze unforgettable airshow moments and wild mountain landscapes. My goal is to tell
-        stories through still images.
-      </p>
-    </section>
-
-    <section id="contact" aria-label="Contact section">
-      <h2>Contact</h2>
-      <p class="contact">
-        You can email me directly at
-        <a class="link" href="mailto:theotonkinson0@gmail.com">theotonkinson0@gmail.com</a><br />
-        or use the form below:
-      </p>
-      <form
-        action="mailto:theotonkinson0@gmail.com"
-        method="POST"
-        enctype="text/plain"
-        aria-label="Contact form"
-      >
-        <input type="text" name="name" placeholder="Your Name" required aria-required="true" />
-        <input type="email" name="email" placeholder="Your Email" required aria-required="true" />
-        <textarea name="message" rows="5" placeholder="Your Message" required aria-required="true"></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </section>
-
-    <section id="blog" aria-label="Blog section">
-      <h2>Photography Blog</h2>
-      <p class="blog">Coming soon – articles on gear reviews, airshow highlights, and behind-the-scenes adventures.</p>
-    </section>
-
-    <section id="shop" aria-label="Shop section">
-      <h2>Prints & Downloads</h2>
-      <p class="shop">Launching soon – buy high-quality prints and digital downloads of your favourite shots.</p>
-
-      <h3>Instagram Feed</h3>
-      <div id="insta-feed">
-        <!-- Instagram posts will load here -->
+    <div class="product">
+      <img src="images/Landscape1.jpg" alt="Mountain Landscape Print" />
+      <div class="product-details">
+        <h3>Mountain Landscape Print</h3>
+        <p>Beautiful 16"x12" landscape print from my travels.</p>
+        <button class="buy-button" data-product="Mountain Landscape Print">Buy Now</button>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer>
-    <p>&copy; 2025 T.T Aviation Photography. Site built with GitHub Pages. Designed by Theo Tonkinson.</p>
-  </footer>
+  <!-- Contact -->
+  <section id="contactSection">
+    <h2>Contact Me</h2>
+    <form class="contact-form" id="contactForm">
+      <label for="name">Your Name *</label>
+      <input type="text" id="name" name="name" required />
 
-  <!-- Lightbox container -->
-  <div id="lightbox" class="lightbox" style="display:none;" aria-hidden="true">
-    <img src="" alt="Enlarged photo" />
-  </div>
+      <label for="email">Your Email *</label>
+      <input type="email" id="email" name="email" required />
 
-  <script>
-    // Section navigation with animation
-    const sections = document.querySelectorAll('main section');
-    const navLinks = document.querySelectorAll('nav a.nav-link');
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
-    function activateSection(targetId) {
-      sections.forEach((section) => {
-        if (section.id === targetId) {
-          section.classList.add('active');
-        } else {
-          section.classList.remove('active');
-        }
-      });
-      navLinks.forEach((link) => {
-        if (link.getAttribute('href') === '#' + targetId) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-    }
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-    navLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = link.getAttribute('href').substring(1);
-        activateSection(target);
-        window.history.pushState(null, '', '#' + target);
-      });
+</main>
+
+<script>
+  // Sections and nav links
+  const homeSection = document.getElementById('homeSection');
+  const blogSection = document.getElementById('blogSection');
+  const shopSection = document.getElementById('shopSection');
+  const contactSection = document.getElementById('contactSection');
+
+  const navHome = document.getElementById('navHome');
+  const navBlog = document.getElementById('navBlog');
+  const navShop = document.getElementById('navShop');
+  const navContact = document.getElementById('navContact');
+
+  function showSection(sectionToShow) {
+    [homeSection, blogSection, shopSection, contactSection].forEach(section => {
+      section.classList.remove('active');
     });
+    sectionToShow.classList.add('active');
+  }
 
-    // Activate on page load based on URL hash
-    window.addEventListener('load', () => {
-      const hash = window.location.hash.substring(1);
-      if (hash) activateSection(hash);
-      else activateSection('home');
+  function setActiveNav(activeLink) {
+    [navHome, navBlog, navShop, navContact].forEach(link => {
+      link.classList.remove('active');
     });
+    activeLink.classList.add('active');
+  }
 
-    // Gallery loading
-    async function loadGallery() {
-      const gallery = document.getElementById('gallery');
-      try {
-        const response = await fetch('images.json');
-        const images = await response.json();
+  navHome.addEventListener('click', e => {
+    e.preventDefault();
+    showSection(homeSection);
+    setActiveNav(navHome);
+  });
+  navBlog.addEventListener('click', e => {
+    e.preventDefault();
+    showSection(blogSection);
+    setActiveNav(navBlog);
+  });
+  navShop.addEventListener('click', e => {
+    e.preventDefault();
+    showSection(shopSection);
+    setActiveNav(navShop);
+  });
+  navContact.addEventListener('click', e => {
+    e.preventDefault();
+    showSection(contactSection);
+    setActiveNav(navContact);
+  });
 
-        images.forEach((imgName, i) => {
-          const card = document.createElement('div');
-          card.classList.add('photo-card');
-
-          // Image with lightbox link
-          const imgLink = document.createElement('a');
-          imgLink.href = '#lightbox';
-          imgLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            openLightbox('images/' + imgName, imgName.split('.')[0]);
-          });
-
-          const img = document.createElement('img');
-          img.src = 'images/' + imgName;
-          img.alt = imgName.split('.')[0];
-          imgLink.appendChild(img);
-
-          // Buy button
-          const buyBtn = document.createElement('a');
-          buyBtn.href = `mailto:theotonkinson0@gmail.com?subject=Buying photo: ${encodeURIComponent(imgName)}`;
-          buyBtn.classList.add('buy-btn');
-          buyBtn.textContent = 'Buy This Photo';
-
-          card.appendChild(imgLink);
-          card.appendChild(buyBtn);
-          gallery.appendChild(card);
-        });
-      } catch (err) {
-        gallery.innerHTML = '<p>Error loading gallery. Please check images.json file.</p>';
-        console.error(err);
-      }
+  // Contact form mailto
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = encodeURIComponent(contactForm.name.value.trim());
+    const email = encodeURIComponent(contactForm.email.value.trim());
+    const message = encodeURIComponent(contactForm.message.value.trim());
+    if (!name || !email || !message) {
+      alert('Please fill in all fields.');
+      return;
     }
+    const mailtoLink = `mailto:theotonkinson0@gmail.com?subject=Contact from ${name}&body=Name:%20${name}%0AEmail:%20${email}%0A%0AMessage:%0A${message}`;
+    window.location.href = mailtoLink;
+    contactForm.reset();
+  });
 
-    // Lightbox functions
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-
-    function openLightbox(src, alt) {
-      lightbox.style.display = 'flex';
-      lightbox.setAttribute('aria-hidden', 'false');
-      lightboxImg.src = src;
-      lightboxImg.alt = alt;
-    }
-
-    function closeLightbox() {
-      lightbox.style.display = 'none';
-      lightbox.setAttribute('aria-hidden', 'true');
-      lightboxImg.src = '';
-      lightboxImg.alt = '';
-    }
-
-    lightbox.addEventListener('click', closeLightbox);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-        closeLightbox();
-      }
+  // Shop buy buttons (example: just alert product name, you can extend)
+  document.querySelectorAll('.buy-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      alert(`Thank you for your interest in "${btn.dataset.product}". Please contact me to complete your purchase.`);
     });
+  });
+</script>
 
-    // Instagram embed - loads your latest posts
-    // Using light widget via Instagram embed URLs
-    function loadInstagramFeed() {
-      const instaFeed = document.getElementById('insta-feed');
-      instaFeed.innerHTML = `
-        <iframe src="https://www.instagram.com/embed.js" style="display:none;"></iframe>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/theotphotography/" data-instgrm-version="14" style="max-width: 600px; margin: auto;"></blockquote>
-      `;
-
-      // Load Instagram embed script dynamically
-      const script = document.createElement('script');
-      script.src = "https://www.instagram.com/embed.js";
-      script.async = true;
-      script.onload = () => {
-        if (window.instgrm) {
-          window.instgrm.Embeds.process();
-        }
-      };
-      document.body.appendChild(script);
-    }
-
-    window.onload = () => {
-      loadGallery();
-      loadInstagramFeed();
-    };
-  </script>
 </body>
 </html>
