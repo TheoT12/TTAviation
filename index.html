@@ -1,102 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>T.TAviation Photography</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-  body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: #0a1a2a; /* dark navy aviation inspired */
-    color: #e0e7ff;
-  }
-
-  header {
-    padding: 1rem 2rem;
-    text-align: center;
-    background: #10294a;
-    font-weight: 700;
-    font-size: 2.5rem;
-    letter-spacing: 0.1em;
-    user-select: none;
-  }
-
-  main {
-    max-width: 1100px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-
-  /* Gallery grid */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-
-  .gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-
-  .gallery img:hover {
-    transform: scale(1.05);
-  }
-
-  /* Contact section */
-  footer {
-    margin-top: 3rem;
-    padding: 2rem 1rem;
-    text-align: center;
-    background: #10294a;
-    color: #a9b7d6;
-  }
-
-  footer a {
-    color: #7fd1ff;
-    text-decoration: none;
-    margin: 0 1rem;
-    font-weight: 600;
-  }
-
-  footer a:hover {
-    text-decoration: underline;
-  }
-
-  /* Instagram embed container */
-  .instagram-widget {
-    margin-top: 1rem;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T.T Aviation Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Dark theme & layout */
+    body {
+      margin: 0;
+      font-family: 'Oswald', sans-serif;
+      background-color: #0c0c0c;
+      color: #f0f0f0;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(90deg, #000000, #1a1a1a);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #333;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      color: #f0f0f0;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 10px;
+      color: #aaa;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #4fa3ff;
+    }
+    main {
+      padding-top: 120px; /* For fixed header */
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      min-height: 100vh;
+    }
+    section {
+      padding: 60px 20px;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: opacity 0.7s ease-in-out;
+      pointer-events: none;
+    }
+    section.active {
+      opacity: 1;
+      position: relative;
+      pointer-events: auto;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .photo-card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+    .photo-card img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+    .photo-card img:hover {
+      transform: scale(1.05);
+    }
+    .buy-btn {
+      display: inline-block;
+      margin: 12px 0 20px;
+      padding: 10px 20px;
+      background: #4fa3ff;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    .buy-btn:hover {
+      background: #2b7bdb;
+    }
+    /* Lightbox styles */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+    .lightbox:target {
+      display: flex;
+    }
+    /* Contact form styles */
+    .about,
+    .contact,
+    .blog,
+    .shop {
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      background-color: #111;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #333;
+      margin-top: 50px;
+    }
+    a.link {
+      color: #4fa3ff;
+      text-decoration: underline;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input,
+    textarea {
+      padding: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+    button {
+      padding: 12px;
+      font-weight: bold;
+      background: #4fa3ff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #2b7bdb;
+    }
+    /* Instagram embed container */
+    #insta-feed {
+      max-width: 700px;
+      margin: 30px auto;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>T.T Aviation Photography</h1>
+    <nav>
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#portfolio" class="nav-link">Portfolio</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#blog" class="nav-link">Blog</a>
+      <a href="#shop" class="nav-link">Shop</a>
+    </nav>
+  </header>
 
-<header>T.TAviation</header>
+  <main>
+    <section id="home" class="active" aria-label="Home section">
+      <h2>Welcome to T.T Aviation</h2>
+      <p class="about">
+        I capture high-speed moments in aviation, military aircraft, and landscapes that inspire awe.
+        Explore my world through the lens.
+      </p>
+    </section>
 
-<main>
-  <section class="gallery" id="gallery">
-    <!-- Add your photos here by adding <img src="images/photo1.jpg" alt="Photo description" /> -->
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Sample Photo 1" />
-    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" alt="Sample Photo 2" />
-    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Sample Photo 3" />
-  </section>
-</main>
+    <section id="portfolio" aria-label="Portfolio section">
+      <h2>Photo Gallery</h2>
+      <div class="gallery" id="gallery">
+        <!-- Images load here by JS -->
+      </div>
+    </section>
 
-<footer>
-  <div>Contact me: <a href="mailto:theotonkinson0@gmail.com">theotonkinson0@gmail.com</a></div>
-  <div class="instagram-widget">
-    <a href="https://instagram.com/theotphotography" target="_blank" rel="noopener noreferrer">
-      Follow me on Instagram @theotphotography
-    </a>
+    <section id="about" aria-label="About section">
+      <h2>About Me</h2>
+      <p class="about">
+        I'm Theo, a teenage aviation photographer from Wales. I combine technical skill and artistic
+        vision to freeze unforgettable airshow moments and wild mountain landscapes. My goal is to tell
+        stories through still images.
+      </p>
+    </section>
+
+    <section id="contact" aria-label="Contact section">
+      <h2>Contact</h2>
+      <p class="contact">
+        You can email me directly at
+        <a class="link" href="mailto:theotonkinson0@gmail.com">theotonkinson0@gmail.com</a><br />
+        or use the form below:
+      </p>
+      <form
+        action="mailto:theotonkinson0@gmail.com"
+        method="POST"
+        enctype="text/plain"
+        aria-label="Contact form"
+      >
+        <input type="text" name="name" placeholder="Your Name" required aria-required="true" />
+        <input type="email" name="email" placeholder="Your Email" required aria-required="true" />
+        <textarea name="message" rows="5" placeholder="Your Message" required aria-required="true"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <section id="blog" aria-label="Blog section">
+      <h2>Photography Blog</h2>
+      <p class="blog">Coming soon – articles on gear reviews, airshow highlights, and behind-the-scenes adventures.</p>
+    </section>
+
+    <section id="shop" aria-label="Shop section">
+      <h2>Prints & Downloads</h2>
+      <p class="shop">Launching soon – buy high-quality prints and digital downloads of your favourite shots.</p>
+
+      <h3>Instagram Feed</h3>
+      <div id="insta-feed">
+        <!-- Instagram posts will load here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 T.T Aviation Photography. Site built with GitHub Pages. Designed by Theo Tonkinson.</p>
+  </footer>
+
+  <!-- Lightbox container -->
+  <div id="lightbox" class="lightbox" style="display:none;" aria-hidden="true">
+    <img src="" alt="Enlarged photo" />
   </div>
-</footer>
 
+  <script>
+    // Section navigation with animation
+    const sections = document.querySelectorAll('main section');
+    const navLinks = document.querySelectorAll('nav a.nav-link');
+
+    function activateSection(targetId) {
+      sections.forEach((section) => {
+        if (section.id === targetId) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
+        }
+      });
+      navLinks.forEach((link) => {
+        if (link.getAttribute('href') === '#' + targetId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('href').substring(1);
+        activateSection(target);
+        window.history.pushState(null, '', '#' + target);
+      });
+    });
+
+    // Activate on page load based on URL hash
+    window.addEventListener('load', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) activateSection(hash);
+      else activateSection('home');
+    });
+
+    // Gallery loading
+    async function loadGallery() {
+      const gallery = document.getElementById('gallery');
+      try {
+        const response = await fetch('images.json');
+        const images = await response.json();
+
+        images.forEach((imgName, i) => {
+          const card = document.createElement('div');
+          card.classList.add('photo-card');
+
+          // Image with lightbox link
+          const imgLink = document.createElement('a');
+          imgLink.href = '#lightbox';
+          imgLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openLightbox('images/' + imgName, imgName.split('.')[0]);
+          });
+
+          const img = document.createElement('img');
+          img.src = 'images/' + imgName;
+          img.alt = imgName.split('.')[0];
+          imgLink.appendChild(img);
+
+          // Buy button
+          const buyBtn = document.createElement('a');
+          buyBtn.href = `mailto:theotonkinson0@gmail.com?subject=Buying photo: ${encodeURIComponent(imgName)}`;
+          buyBtn.classList.add('buy-btn');
+          buyBtn.textContent = 'Buy This Photo';
+
+          card.appendChild(imgLink);
+          card.appendChild(buyBtn);
+          gallery.appendChild(card);
+        });
+      } catch (err) {
+        gallery.innerHTML = '<p>Error loading gallery. Please check images.json file.</p>';
+        console.error(err);
+      }
+    }
+
+    // Lightbox functions
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    function openLightbox(src, alt) {
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden', 'false');
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+    }
+
+    lightbox.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+        closeLightbox();
+      }
+    });
+
+    // Instagram embed - loads your latest posts
+    // Using light widget via Instagram embed URLs
+    function loadInstagramFeed() {
+      const instaFeed = document.getElementById('insta-feed');
+      instaFeed.innerHTML = `
+        <iframe src="https://www.instagram.com/embed.js" style="display:none;"></iframe>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/theotphotography/" data-instgrm-version="14" style="max-width: 600px; margin: auto;"></blockquote>
+      `;
+
+      // Load Instagram embed script dynamically
+      const script = document.createElement('script');
+      script.src = "https://www.instagram.com/embed.js";
+      script.async = true;
+      script.onload = () => {
+        if (window.instgrm) {
+          window.instgrm.Embeds.process();
+        }
+      };
+      document.body.appendChild(script);
+    }
+
+    window.onload = () => {
+      loadGallery();
+      loadInstagramFeed();
+    };
+  </script>
 </body>
 </html>
